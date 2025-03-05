@@ -14,8 +14,11 @@
 <body>
   <h1>Verbos con Audios</h1>
 
+  <button id="darkModeToggle" aria-label="Alternar modo oscuro"></button>
+
   <div class="main-container">
     <div class="filter-container">
+      <label for="typeFilter">Filtro:</label>
       <select id="typeFilter" class="modern-select">
         <option value="">Todos</option>
         <option value="I">Irregular (I)</option>
@@ -23,17 +26,17 @@
       </select>
     </div>
 
-    <table id="verbTable">
+    <table id="verbTable" aria-label="Tabla de verbos">
       <thead>
         <tr>
-          <th>Audio</th>
-          <th>Tipo</th>
-          <th>Verbo</th>
-          <th>3ra Persona</th>
-          <th>Pasado Simple</th>
-          <th>Participio Pasado</th>
-          <th>Gerundio</th>
-          <th>Significado</th>
+          <th scope="col">Audio</th>
+          <th scope="col">Tipo</th>
+          <th scope="col">Verbo</th>
+          <th scope="col">3ra Persona</th>
+          <th scope="col">Pasado Simple</th>
+          <th scope="col">Participio Pasado</th>
+          <th scope="col">Gerundio</th>
+          <th scope="col">Significado</th>
         </tr>
       </thead>
       <tbody>

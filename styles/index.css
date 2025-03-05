@@ -1,15 +1,20 @@
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f8f9fa;
-  color: #333;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background-color: #f0f0f0;
+  color: #282828;
   margin: 0;
   padding: 0;
+  position: relative;
+  transition: background-color 0.4s ease, color 0.4s ease;
+  scroll-behavior: smooth;
+  /* Scroll suave */
 }
 
 h1 {
   text-align: center;
   margin: 30px 0;
-  color: #007bff;
+  color: #282828;
+  transition: color 0.4s ease;
 }
 
 .main-container {
@@ -21,65 +26,75 @@ h1 {
 .filter-container {
   margin-bottom: 20px;
   width: 90%;
-  /* Ajustar el ancho del filtro */
   display: flex;
-  justify-content: flex-start;
-  /* Alinear el filtro a la izquierda */
+  align-items: center;
+  background-color: #ffffff;
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+.filter-container label {
+  margin-right: 12px;
+  transition: color 0.4s ease;
 }
 
 #typeFilter {
-  padding: 10px 15px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 16px;
+  padding: 12px 16px;
+  border: none;
+  border-radius: 12px;
+  font-size: 17px;
   cursor: pointer;
-  background-color: #fff;
-  color: #333;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  transition: border-color 0.3s ease;
+  background-color: #ffffff;
+  color: #282828;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.4s ease, box-shadow 0.4s ease;
 }
 
 #typeFilter:focus {
   outline: none;
-  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 122, 255, 0.2);
 }
 
 table {
   width: 90%;
   margin: 0 auto;
-  /* Eliminar el margen superior de la tabla */
   border-collapse: collapse;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-  background-color: white;
-  border-radius: 10px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   overflow: hidden;
+  transition: background-color 0.4s ease, box-shadow 0.4s ease;
 }
 
 th,
 td {
-  padding: 15px 20px;
+  padding: 14px 18px;
   text-align: left;
-  border-bottom: 1px solid #eee;
-  font-size: 18px;
+  border-bottom: 1px solid #e0e0e0;
+  font-size: 17px;
+  transition: background-color 0.4s ease, color 0.4s ease;
 }
 
 th {
-  background-color: #007bff;
-  color: white;
+  background-color: #007aff;
+  color: #ffffff;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 1px;
+  transition: background-color 0.4s ease, color 0.4s ease;
+  background-image: linear-gradient(to bottom, #007aff, #0066cc);
+  /* Degradado sutil */
 }
 
 tr:hover {
-  background-color: #f0f8ff;
+  background-color: #f8f8f8;
 }
 
 .audio-container {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  background-color: #007bff;
+  width: 32px;
+  height: 32px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -87,32 +102,123 @@ tr:hover {
 }
 
 .audio-button {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background-color: white;
+  background-color: transparent;
+  border: none;
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: filter 0.3s ease;
 }
 
-.audio-button i {
-  font-size: 24px;
-  color: #007bff;
+.audio-button:hover {
+  filter: brightness(1.2);
+}
+
+.audio-button svg {
+  width: 20px;
+  height: 20px;
+  fill: #007aff;
+  transition: fill 0.4s ease;
 }
 
 footer {
-  padding: 20px;
+  padding: 24px;
   text-align: center;
-  font-size: 14px;
-  color: #666;
+  font-size: 15px;
+  color: #6d6d72;
+  transition: color 0.4s ease;
 }
 
 footer a {
-  color: #007bff;
+  color: #007aff;
   text-decoration: none;
+  transition: color 0.4s ease;
 }
 
 footer a:hover {
   text-decoration: underline;
+}
+
+#darkModeToggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #007aff;
+  color: #ffffff;
+  border: none;
+  padding: 12px 18px;
+  border-radius: 12px;
+  font-size: 20px;
+  cursor: pointer;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.4s ease, box-shadow 0.4s ease;
+  background-image: linear-gradient(to bottom, #007aff, #0066cc);
+  /* Degradado sutil */
+}
+
+#darkModeToggle:hover {
+  background-color: #0066cc;
+}
+
+body.dark-mode {
+  background-color: #121212;
+  color: #e0e0e0;
+}
+
+body.dark-mode h1,
+body.dark-mode #typeFilter,
+body.dark-mode table,
+body.dark-mode .audio-button svg,
+body.dark-mode footer a,
+body.dark-mode #darkModeToggle {
+  color: #80aaff;
+}
+
+body.dark-mode .filter-container,
+body.dark-mode table,
+body.dark-mode #typeFilter {
+  background-color: #2c2c2c;
+}
+
+body.dark-mode th {
+  background-color: #80aaff;
+  color: #121212;
+  background-image: linear-gradient(to bottom, #80aaff, #6699ff);
+  /* Degradado sutil */
+}
+
+body.dark-mode td,
+body.dark-mode th {
+  border-bottom: 1px solid #3f3f3f;
+}
+
+body.dark-mode tr:hover {
+  background-color: #3f3f3f;
+}
+
+body.dark-mode .audio-button svg {
+  fill: #80aaff;
+}
+
+body.dark-mode #darkModeToggle:hover {
+  background-color: #6699ff;
+}
+
+/* Microinteracciones */
+#typeFilter:hover,
+table:hover,
+.audio-button:hover,
+#darkModeToggle:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+#darkModeToggle:hover {
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* Efecto Parallax */
+body {
+  background-attachment: fixed;
+  background-size: cover;
 }

@@ -249,6 +249,7 @@ const verbList = [
     simplePast: "BENT",
     pastParticiple: "BENT",
     gerund: "BENDING",
+    meaning: "Doblar(Se) - Encorvar(Se)",
   },
   {
     type: "I",
@@ -1097,3 +1098,23 @@ typeFilter.addEventListener("change", () => {
 const currentYear = new Date().getFullYear();
 
 document.getElementById("currentYear").textContent = currentYear;
+
+const darkModeToggle = document.getElementById("darkModeToggle");
+
+// Función para establecer el emoji correcto según el modo
+function setDarkModeEmoji() {
+  if (document.body.classList.contains("dark-mode")) {
+    darkModeToggle.textContent = "☀️"; // Emoji para modo claro
+  } else {
+    darkModeToggle.textContent = "🌑"; // Emoji para modo oscuro
+  }
+}
+
+// Establecer el modo claro y el emoji por defecto al cargar la página
+document.body.classList.remove("dark-mode");
+setDarkModeEmoji();
+
+darkModeToggle.addEventListener("click", () => {
+  document.body.classList.toggle("dark-mode");
+  setDarkModeEmoji();
+});
