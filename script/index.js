@@ -1184,7 +1184,7 @@ function setDarkModeEmoji() {
   if (document.body.classList.contains("dark-mode")) {
     darkModeToggle.textContent = "☀️";
   } else {
-    darkModeToggle.textContent = "";
+    darkModeToggle.textContent = "🌑";
   }
 }
 
