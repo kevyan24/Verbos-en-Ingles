@@ -200,7 +200,8 @@ body.dark-mode {
   color: var(--dark-mode-text);
 }
 
-body.dark-modebody.dark-mode h1,
+body.dark-mode,
+body.dark-mode h1,
 body.dark-mode #searchBar,
 body.dark-mode #typeFilter,
 body.dark-mode table,
