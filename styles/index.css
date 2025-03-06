@@ -222,3 +222,100 @@ body {
   background-attachment: fixed;
   background-size: cover;
 }
+
+.next-button {
+  background-color: #007aff;
+  color: #ffffff;
+  border: none;
+  padding: 12px 18px;
+  border-radius: 12px;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.4s ease, box-shadow 0.4s ease;
+  background-image: linear-gradient(to bottom, #007aff, #0066cc);
+  margin-left: 10px;
+}
+
+.next-button:hover {
+  background-color: #0066cc;
+}
+
+body.dark-mode .next-button {
+  background-color: #80aaff;
+  color: #121212;
+  background-image: linear-gradient(to bottom, #80aaff, #6699ff);
+}
+
+body.dark-mode .next-button:hover {
+  background-color: #6699ff;
+}
+
+.page-button {
+  background-color: #007aff;
+  color: #ffffff;
+  border: none;
+  padding: 12px 18px;
+  border-radius: 12px;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.4s ease, box-shadow 0.4s ease;
+  background-image: linear-gradient(to bottom, #007aff, #0066cc);
+  margin-left: 10px;
+}
+
+.page-button:hover {
+  background-color: #0066cc;
+}
+
+body.dark-mode .page-button {
+  background-color: #80aaff;
+  color: #121212;
+  background-image: linear-gradient(to bottom, #80aaff, #6699ff);
+}
+
+body.dark-mode .page-button:hover {
+  background-color: #6699ff;
+}
+
+.page-button {
+  background-color: #007aff;
+  color: #ffffff;
+  border: none;
+  padding: 12px 18px;
+  border-radius: 12px;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.4s ease, box-shadow 0.4s ease;
+  background-image: linear-gradient(to bottom, #007aff, #0066cc);
+  margin-left: 10px;
+}
+
+.page-button:hover {
+  background-color: #0066cc;
+}
+
+.page-button:disabled {
+  /* Estilos para botón deshabilitado */
+  background-color: #ccc;
+  cursor: default;
+  box-shadow: none;
+  background-image: none;
+}
+
+body.dark-mode .page-button {
+  background-color: #80aaff;
+  color: #121212;
+  background-image: linear-gradient(to bottom, #80aaff, #6699ff);
+}
+
+body.dark-mode .page-button:hover {
+  background-color: #6699ff;
+}
+
+body.dark-mode .page-button:disabled {
+  /* Estilos para botón deshabilitado en modo oscuro */
+  background-color: #555;
+}

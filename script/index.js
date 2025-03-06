@@ -1006,11 +1006,20 @@ const audios = [
 
 const tableBody = document.querySelector("#verbTable tbody");
 const typeFilter = document.getElementById("typeFilter");
+const nextButton = document.getElementById("nextButton");
+const prevButton = document.getElementById("prevButton");
+
+let currentPage = 0;
+const verbsPerPage = 10;
 
 function renderTable(verbs) {
+  const start = currentPage * verbsPerPage;
+  const end = start + verbsPerPage;
+  const currentVerbs = verbs.slice(start, end);
+
   tableBody.innerHTML = "";
 
-  verbs.forEach((verb) => {
+  currentVerbs.forEach((verb) => {
     const row = document.createElement("tr");
 
     const audioCell = document.createElement("td");
@@ -1080,19 +1089,37 @@ function renderTable(verbs) {
 
     tableBody.appendChild(row);
   });
+
+  nextButton.disabled = end >= verbs.length;
+  prevButton.disabled = currentPage === 0;
 }
 
-renderTable(verbList);
+function updateTable() {
+  const selectedType = typeFilter.value;
+  let filteredVerbs = verbList;
+
+  if (selectedType !== "") {
+    filteredVerbs = verbList.filter((verb) => verb.type === selectedType);
+  }
+
+  renderTable(filteredVerbs);
+}
+
+updateTable();
 
 typeFilter.addEventListener("change", () => {
-  const selectedType = typeFilter.value;
+  currentPage = 0;
+  updateTable();
+});
 
-  if (selectedType === "") {
-    renderTable(verbList);
-  } else {
-    const filteredVerbs = verbList.filter((verb) => verb.type === selectedType);
-    renderTable(filteredVerbs);
-  }
+nextButton.addEventListener("click", () => {
+  currentPage++;
+  updateTable();
+});
+
+prevButton.addEventListener("click", () => {
+  currentPage--;
+  updateTable();
 });
 
 const currentYear = new Date().getFullYear();
@@ -1101,16 +1128,14 @@ document.getElementById("currentYear").textContent = currentYear;
 
 const darkModeToggle = document.getElementById("darkModeToggle");
 
-// Función para establecer el emoji correcto según el modo
 function setDarkModeEmoji() {
   if (document.body.classList.contains("dark-mode")) {
-    darkModeToggle.textContent = "☀️"; // Emoji para modo claro
+    darkModeToggle.textContent = "☀️";
   } else {
-    darkModeToggle.textContent = "🌑"; // Emoji para modo oscuro
+    darkModeToggle.textContent = "";
   }
 }
 
-// Establecer el modo claro y el emoji por defecto al cargar la página
 document.body.classList.remove("dark-mode");
 setDarkModeEmoji();
 
