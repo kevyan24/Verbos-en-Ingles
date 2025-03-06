@@ -7,7 +7,6 @@ body {
   position: relative;
   transition: background-color 0.4s ease, color 0.4s ease;
   scroll-behavior: smooth;
-  /* Scroll suave */
 }
 
 h1 {
@@ -33,11 +32,7 @@ h1 {
   border-radius: 12px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   transition: background-color 0.4s ease, box-shadow 0.4s ease;
-}
-
-.filter-container label {
-  margin-right: 12px;
-  transition: color 0.4s ease;
+  justify-content: space-between;
 }
 
 #typeFilter {
@@ -85,7 +80,6 @@ th {
   letter-spacing: 1px;
   transition: background-color 0.4s ease, color 0.4s ease;
   background-image: linear-gradient(to bottom, #007aff, #0066cc);
-  /* Degradado sutil */
 }
 
 tr:hover {
@@ -153,7 +147,6 @@ footer a:hover {
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
   transition: background-color 0.4s ease, box-shadow 0.4s ease;
   background-image: linear-gradient(to bottom, #007aff, #0066cc);
-  /* Degradado sutil */
 }
 
 #darkModeToggle:hover {
@@ -184,7 +177,6 @@ body.dark-mode th {
   background-color: #80aaff;
   color: #121212;
   background-image: linear-gradient(to bottom, #80aaff, #6699ff);
-  /* Degradado sutil */
 }
 
 body.dark-mode td,
@@ -204,51 +196,9 @@ body.dark-mode #darkModeToggle:hover {
   background-color: #6699ff;
 }
 
-/* Microinteracciones */
-#typeFilter:hover,
-table:hover,
-.audio-button:hover,
-#darkModeToggle:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
-}
-
-#darkModeToggle:hover {
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
-}
-
-/* Efecto Parallax */
-body {
-  background-attachment: fixed;
-  background-size: cover;
-}
-
-.next-button {
-  background-color: #007aff;
-  color: #ffffff;
-  border: none;
-  padding: 12px 18px;
-  border-radius: 12px;
-  font-size: 16px;
-  cursor: pointer;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
-  transition: background-color 0.4s ease, box-shadow 0.4s ease;
-  background-image: linear-gradient(to bottom, #007aff, #0066cc);
-  margin-left: 10px;
-}
-
-.next-button:hover {
-  background-color: #0066cc;
-}
-
-body.dark-mode .next-button {
-  background-color: #80aaff;
-  color: #121212;
-  background-image: linear-gradient(to bottom, #80aaff, #6699ff);
-}
-
-body.dark-mode .next-button:hover {
-  background-color: #6699ff;
+.pagination-buttons {
+  display: flex;
+  align-items: center;
 }
 
 .page-button {
@@ -262,35 +212,8 @@ body.dark-mode .next-button:hover {
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
   transition: background-color 0.4s ease, box-shadow 0.4s ease;
   background-image: linear-gradient(to bottom, #007aff, #0066cc);
-  margin-left: 10px;
-}
-
-.page-button:hover {
-  background-color: #0066cc;
-}
-
-body.dark-mode .page-button {
-  background-color: #80aaff;
-  color: #121212;
-  background-image: linear-gradient(to bottom, #80aaff, #6699ff);
-}
-
-body.dark-mode .page-button:hover {
-  background-color: #6699ff;
-}
-
-.page-button {
-  background-color: #007aff;
-  color: #ffffff;
-  border: none;
-  padding: 12px 18px;
-  border-radius: 12px;
-  font-size: 16px;
-  cursor: pointer;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
-  transition: background-color 0.4s ease, box-shadow 0.4s ease;
-  background-image: linear-gradient(to bottom, #007aff, #0066cc);
-  margin-left: 10px;
+  margin-right: 10px;
+  margin-left: 0;
 }
 
 .page-button:hover {
@@ -298,7 +221,6 @@ body.dark-mode .page-button:hover {
 }
 
 .page-button:disabled {
-  /* Estilos para botón deshabilitado */
   background-color: #ccc;
   cursor: default;
   box-shadow: none;
@@ -316,6 +238,6 @@ body.dark-mode .page-button:hover {
 }
 
 body.dark-mode .page-button:disabled {
-  /* Estilos para botón deshabilitado en modo oscuro */
-  background-color: #555;
+  background-color: #3f3f3f;
+  color: #777;
 }

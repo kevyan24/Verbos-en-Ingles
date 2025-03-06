@@ -1034,15 +1034,24 @@ function renderTable(verbs) {
     audioCell.appendChild(audioContainer);
     row.appendChild(audioCell);
 
-    const audio = document.createElement("audio");
-    const audioData = audios.find(audio => audio.nombre.toLowerCase().startsWith(verb.baseForm.toLowerCase()));
-    if (audioData) {
-      audio.src = audioData.ruta;
-    } else {
-      console.warn(`No se encontró audio para el verbo: ${verb.baseForm}`);
-    }
+    let audio = null; // Inicializar audio como null
 
     audioContainer.addEventListener("click", () => {
+      if (!audio) { // Cargar audio solo si es null
+        audio = new Audio();
+        const audioData = audios.find(audio => audio.nombre.toLowerCase().startsWith(verb.baseForm.toLowerCase()));
+        if (audioData) {
+          audio.src = audioData.ruta;
+        } else {
+          console.warn(`No se encontró audio para el verbo: ${verb.baseForm}`);
+        }
+
+        audio.addEventListener("ended", () => {
+          playIcon.classList.remove("fa-pause");
+          playIcon.classList.add("fa-play");
+        });
+      }
+
       if (audio.paused) {
         audio.play();
         playIcon.classList.remove("fa-play");
@@ -1052,11 +1061,6 @@ function renderTable(verbs) {
         playIcon.classList.remove("fa-pause");
         playIcon.classList.add("fa-play");
       }
-    });
-
-    audio.addEventListener("ended", () => {
-      playIcon.classList.remove("fa-pause");
-      playIcon.classList.add("fa-play");
     });
 
     const typeCell = document.createElement("td");
@@ -1132,7 +1136,7 @@ function setDarkModeEmoji() {
   if (document.body.classList.contains("dark-mode")) {
     darkModeToggle.textContent = "☀️";
   } else {
-    darkModeToggle.textContent = "";
+    darkModeToggle.textContent = "🌑";
   }
 }
 
