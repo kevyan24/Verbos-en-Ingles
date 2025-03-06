@@ -1008,14 +1008,46 @@ const tableBody = document.querySelector("#verbTable tbody");
 const typeFilter = document.getElementById("typeFilter");
 const nextButton = document.getElementById("nextButton");
 const prevButton = document.getElementById("prevButton");
+const aprendidosToggle = document.getElementById("aprendidosToggle");
+const searchBar = document.getElementById("searchBar");
 
 let currentPage = 0;
 const verbsPerPage = 10;
+let showAprendidosOnly = false;
+
+let aprendidosVerbs = JSON.parse(localStorage.getItem("aprendidosVerbs")) || {};
+
+function updateAprendidosCount() {
+  aprendidosCount.textContent = Object.keys(aprendidosVerbs).length;
+}
 
 function renderTable(verbs) {
+  let filteredVerbs = verbs;
+
+  if (showAprendidosOnly) {
+    filteredVerbs = verbs.filter(verb => aprendidosVerbs[verb.baseForm]);
+  }
+
+  const selectedType = typeFilter.value;
+  if (selectedType !== "") {
+    filteredVerbs = filteredVerbs.filter(verb => verb.type === selectedType);
+  }
+
+  const searchTerm = searchBar.value.toLowerCase();
+  if (searchTerm !== "") {
+    filteredVerbs = filteredVerbs.filter(verb =>
+      verb.baseForm.toLowerCase().includes(searchTerm) ||
+      verb.thirdPerson.toLowerCase().includes(searchTerm) ||
+      verb.simplePast.toLowerCase().includes(searchTerm) ||
+      verb.pastParticiple.toLowerCase().includes(searchTerm) ||
+      verb.gerund.toLowerCase().includes(searchTerm) ||
+      verb.meaning.toLowerCase().includes(searchTerm)
+    );
+  }
+
   const start = currentPage * verbsPerPage;
   const end = start + verbsPerPage;
-  const currentVerbs = verbs.slice(start, end);
+  const currentVerbs = filteredVerbs.slice(start, end);
 
   tableBody.innerHTML = "";
 
@@ -1034,10 +1066,10 @@ function renderTable(verbs) {
     audioCell.appendChild(audioContainer);
     row.appendChild(audioCell);
 
-    let audio = null; // Inicializar audio como null
+    let audio = null;
 
     audioContainer.addEventListener("click", () => {
-      if (!audio) { // Cargar audio solo si es null
+      if (!audio) {
         audio = new Audio();
         const audioData = audios.find(audio => audio.nombre.toLowerCase().startsWith(verb.baseForm.toLowerCase()));
         if (audioData) {
@@ -1049,6 +1081,9 @@ function renderTable(verbs) {
         audio.addEventListener("ended", () => {
           playIcon.classList.remove("fa-pause");
           playIcon.classList.add("fa-play");
+        });
+        audio.addEventListener("error", () => {
+          console.error(`Error al cargar el audio: ${audioData.ruta}`);
         });
       }
 
@@ -1091,27 +1126,41 @@ function renderTable(verbs) {
     meaningCell.textContent = verb.meaning;
     row.appendChild(meaningCell);
 
+    const aprendidoCell = document.createElement("td");
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.checked = !!aprendidosVerbs[verb.baseForm];
+    checkbox.addEventListener("change", () => {
+      if (checkbox.checked) {
+        aprendidosVerbs[verb.baseForm] = verb;
+      } else {
+        delete aprendidosVerbs[verb.baseForm];
+      }
+      localStorage.setItem("aprendidosVerbs", JSON.stringify(aprendidosVerbs));
+      updateAprendidosCount();
+      updateTable();
+    });
+    aprendidoCell.appendChild(checkbox);
+    row.appendChild(aprendidoCell);
+
     tableBody.appendChild(row);
   });
 
-  nextButton.disabled = end >= verbs.length;
+  nextButton.disabled = end >= filteredVerbs.length;
   prevButton.disabled = currentPage === 0;
+  updateAprendidosCount();
 }
 
 function updateTable() {
-  const selectedType = typeFilter.value;
-  let filteredVerbs = verbList;
-
-  if (selectedType !== "") {
-    filteredVerbs = verbList.filter((verb) => verb.type === selectedType);
-  }
-
-  renderTable(filteredVerbs);
+  renderTable(verbList);
 }
 
-updateTable();
-
 typeFilter.addEventListener("change", () => {
+  currentPage = 0;
+  updateTable();
+});
+
+searchBar.addEventListener("input", () => {
   currentPage = 0;
   updateTable();
 });
@@ -1127,7 +1176,6 @@ prevButton.addEventListener("click", () => {
 });
 
 const currentYear = new Date().getFullYear();
-
 document.getElementById("currentYear").textContent = currentYear;
 
 const darkModeToggle = document.getElementById("darkModeToggle");
@@ -1136,7 +1184,7 @@ function setDarkModeEmoji() {
   if (document.body.classList.contains("dark-mode")) {
     darkModeToggle.textContent = "☀️";
   } else {
-    darkModeToggle.textContent = "🌑";
+    darkModeToggle.textContent = "";
   }
 }
 
@@ -1147,3 +1195,12 @@ darkModeToggle.addEventListener("click", () => {
   document.body.classList.toggle("dark-mode");
   setDarkModeEmoji();
 });
+
+aprendidosToggle.addEventListener("click", () => {
+  showAprendidosOnly = !showAprendidosOnly;
+  aprendidosToggle.textContent = showAprendidosOnly ? "Ver Todos" : "Ver Aprendidos";
+  currentPage = 0;
+  updateTable();
+});
+
+updateTable();
